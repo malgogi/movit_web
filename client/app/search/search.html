@@ -1,0 +1,69 @@
+<searchbar></searchbar>
+<div class="container">
+	<section id="about" style="padding-top:20px;">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <h2 class="section-heading">검색결과</h2>
+                    <h3 class="section-subheading text-muted">당신이 찾으시는 최적의 결과입니다.</h3>
+                </div>
+            </div>
+            <ul class="nav nav-tabs nav-justified">
+                <li role="presentation" ng-class="currentTab == 0 ? 'active' : ''" ng-click="currentTab = 0"><a href="#">bundling</a></li> 
+                <li role="presentation" ng-class="currentTab == 1 ? 'active' : ''" ng-click="currentTab = 1"><a href="#">piechart</a></li>
+                <li role="presentation" ng-class="currentTab == 2 ? 'active' : ''" ng-click="currentTab = 2"><a href="#">word cloud</a></li>
+                <li role="presentation" ng-class="currentTab == 3 ? 'active' : ''" ng-click="currentTab = 3"><a href="#">bipartite</a></li>
+            </ul>
+            <div class="chart-wrapper" style="padding-top:30px;">
+                <div class="row" style="text-align:center;margin-bottom : 30px;" ng-show="currentTab == 0">
+                    <div id="edge-bundling"></div>    
+                </div>
+                <div class="row" style="text-align:center;margin-bottom : 30px;" ng-show="currentTab == 1">
+                    <div id="pie-chart"></div>
+                </div>
+                <div class="row" style="text-align:center;margin-bottom : 30px;" ng-show="currentTab == 2">
+                    <div id="word-cloud"></div>
+                </div>
+                <div class="row" style="text-align:center;margin-bottom : 30px;" ng-show="currentTab == 3">
+                    <div id="bipatite"></div>
+                </div>
+            </div>
+            
+
+            
+
+            <div class="row">
+                <div class="col-lg-12">
+                    <ul class="timeline">
+                        <li ng-repeat="movie in movieList | orderBy:'rank'" ng-click="showPage( movie.url )">
+                            <div class="timeline-image">
+                                <img class="img-circle" ng-src="{{movie.imgs.primary}}" alt="">
+                            </div>
+                            <div class="timeline-panel">
+                                <div class="timeline-heading">
+                                    <h4>{{ movie.date }}</h4>
+                                    <h4 class="subheading">{{ movie.rank }}. {{ movie.name }}</h4>
+                                </div>
+                                <div class="timeline-body">
+                                    <p class="text-muted">{{ movie.content }}</p>
+                                </div>
+                            </div>
+                        </li>
+                        
+                        <li class="timeline-inverted">
+                            <div class="timeline-image">
+                                <h4>
+                                    <br>&nbsp;&nbsp;End!
+                                    <br></h4>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</div>
+
+<!-- About Section -->
+    
