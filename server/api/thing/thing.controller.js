@@ -8,7 +8,8 @@
 var exec = require('child_process').exec,
 	stemmer = require('porter-stemmer').stemmer,
 	net = require( 'net' ),
-    child;
+    child,
+    QueryModel = require('../../model/Query');
 
 function removeSpecificChar( str ) {
 	var newStr = "";
@@ -42,6 +43,20 @@ exports.index = function(req, res) {
 	
 };
 
+var mongoStore = function(query){
+
+	
+
+	var silence = new QueryModel({name: query});
+	console.log(silence.name);
+
+	silence.save(function (err, silence){
+		if(err) return console.error(err);
+		
+	});
+
+}
+
 exports.search = function( req, res ) {
 	var q = decodeURIComponent( req.query[ 'query' ] );
 	var newQ  = "";
@@ -51,6 +66,11 @@ exports.search = function( req, res ) {
 		newQ += value + " ";
 	})
 
+	//mongoDB store query
+	mongoStore(newQ);
+
+
+
 	// prev vesion language model
 	// child = exec( 'python ' + __dirname + '/../../ir/rank/rank.py "' + newQ + '"',
 	// 	function( error, stdout, stderr ) {
@@ -59,7 +79,7 @@ exports.search = function( req, res ) {
 	// 	});
 
 
-	//new version svd
+	// new version svd
 	var client = new net.Socket();
 
 	client.connect( 9090, '127.0.0.1', function() {
@@ -67,15 +87,15 @@ exports.search = function( req, res ) {
 		client.write( newQ );
 	});
 
-	// client.on('readable', function() {
-	// 	var total;
-	//   	var chunk;
-	//   	while (null !== (chunk = client.read())) {
-	//     	total += chunk.toString('utf-8');
-	//   	}
-	//   	res.json( JSON.parse( total.toString('utf-8') ) );
-	//   	client.destroy(); // kill client after server's response
-	// });
+	client.on('readable', function() {
+		var total;
+	  	var chunk;
+	  	while (null !== (chunk = client.read())) {
+	    	total += chunk.toString('utf-8');
+	  	}
+	  	res.json( JSON.parse( total.toString('utf-8') ) );
+	  	client.destroy(); // kill client after server's response
+	});
 
 	client.on('data', function(data) {
 		try {
@@ -92,6 +112,7 @@ exports.search = function( req, res ) {
 	client.on('close', function() {
 		console.log('Connection closed');
 	});
+	//res.json(  200, [] );
 	
 }
 
