@@ -8,7 +8,7 @@ import express from 'express';
 import config from './config/environment';
 import http from 'http';
 
-
+var STAGING_DB_URL = 'mongodb://ec2-52-79-100-244.ap-northeast-2.compute.amazonaws.com';
 // Setup server
 var app = express();
 var server = http.createServer(app);
@@ -17,7 +17,7 @@ require('./routes')(app);
 
 //mongoose connect
 var mongoose = require('mongoose');
-mongoose.connect('mongodb://ec2-52-79-100-244.ap-northeast-2.compute.amazonaws.com');
+mongoose.connect( STAGING_DB_URL );
 
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
