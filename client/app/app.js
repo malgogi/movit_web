@@ -15,6 +15,11 @@ angular.module('movitWebApp', [
           templateUrl : 'app/search/search.html',
           controller : 'SearchCtrl'
         })
+      .state('detail', {
+        url : '/detail/:movie_name',
+        templateUrl : 'app/detail/detail.html',
+        controller : 'DetailCtrl'
+      })
     
     $urlRouterProvider
       .otherwise('/');
