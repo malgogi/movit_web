@@ -3,8 +3,4 @@
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>.
 @prefix : <http://www.agfa.com/w3c/euler/socrates#>.
 
-:Mississippi_Grind :directed_by :Ben_Mendelsohn, :Ryan_Reynolds, :Sienna_Miller.
-
-:Ben_Mendelsohn :make :Slow_West.
-
-{?A :directed_by ?B. ?B :make ?C } => { ?A :also_like ?C }.
+{ ?A :also_like ?C } => { ?A :also_like ?C }.
