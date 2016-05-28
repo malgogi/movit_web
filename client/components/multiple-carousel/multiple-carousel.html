@@ -1,32 +1,27 @@
-<!--multiple carousel-->
-	<div class="row">
-	    <div class="col-md-12">
-	    	<!--container-->
-	      	<div class="carousel slide multi-item-carousel" id="theCarousel">
-	        	<div class="carousel-inner">
-		          	<div class="item" ng-repeat=" item in list track by $index">
-		            	<div class="col-xs-4"><a href="#1"><img src="{{item }}" class="img-responsive"></a></div>
-		          	</div>
-		          	<div class="item">
-		            	<div class="col-xs-4"><a href="#1"><img src="http://placehold.it/300/e91e63/000000" class="img-responsive"></a></div>
-		          	</div>
-		          	<div class="item active">
-		            	<div class="col-xs-4"><a href="#1"><img src="http://placehold.it/300/9c27b0/000000" class="img-responsive"></a></div>
-		          	</div>
-		          	<div class="item">
-		            	<div class="col-xs-4"><a href="#1"><img src="http://placehold.it/300/673ab7/000000" class="img-responsive"></a></div>
-		          	</div>
-		          	<div class="item">
-		            	<div class="col-xs-4"><a href="#1"><img src="http://placehold.it/300/4caf50/000000" class="img-responsive"></a></div>
-		          	</div>
-		          	<div class="item">
-		            	<div class="col-xs-4"><a href="#1"><img src="http://placehold.it/300/8bc34a/000000" class="img-responsive"></a></div>
-		          	</div>
-	        	</div>
-		        <a ng-non-bindable class="left carousel-control" href="#theCarousel" data-slide="prev"><i class="glyphicon glyphicon-chevron-left"></i></a>
-		        <a ng-non-bindable class="right carousel-control" href="#theCarousel" data-slide="next"><i class="glyphicon glyphicon-chevron-right"></i></a>
-	      </div>
-	      <!-- container end-->
-	    </div>
-  	</div>
-  	<!--multiple carousel end-->
+<div style="height: 305px">
+    <uib-carousel active="active" interval="myInterval" no-wrap="noWrapSlides">
+      <uib-slide ng-repeat="slide in slides track by slide.id" index="slide.id">
+        <img ng-src="{{slide.image}}" style="margin:auto;">
+        <!-- <div class="carousel-caption">
+          <h4>Slide {{slide.id}}</h4>
+          <p>{{slide.text}}</p>
+        </div> -->
+      </uib-slide>
+    </uib-carousel>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <button type="button" class="btn btn-info" ng-click="addSlide()">Add Slide</button>
+      <button type="button" class="btn btn-info" ng-click="randomize()">Randomize slides</button>
+      <div class="checkbox">
+        <label>
+          <input type="checkbox" ng-model="noWrapSlides">
+          Disable Slide Looping
+        </label>
+      </div>
+    </div>
+    <div class="col-md-6">
+      Interval, in milliseconds: <input type="number" class="form-control" ng-model="myInterval">
+      <br />Enter a negative number or 0 to stop the interval.
+    </div>
+  </div>

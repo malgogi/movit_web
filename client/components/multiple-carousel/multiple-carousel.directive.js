@@ -33,4 +33,4 @@ angular.module('movitWebApp')
 //   	$(this).siblings(':first').children(':first-child').clone().appendTo($(this));
 //   }
 // });
-console.log('this');
+//console.log('this');
