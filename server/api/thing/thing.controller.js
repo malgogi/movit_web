@@ -67,7 +67,9 @@ exports.search = function( req, res ) {
 	})
 
 	//mongoDB store query
-	mongoStore(newQ);
+
+	//temp comment;
+	//mongoStore(newQ);
 
 
 
@@ -79,40 +81,41 @@ exports.search = function( req, res ) {
 	// 	});
 
 
+	//temp comment
 	// new version svd
-	var client = new net.Socket();
+	// var client = new net.Socket();
 
-	client.connect( 9090, '127.0.0.1', function() {
-		console.log('Connected');
-		client.write( newQ );
-	});
+	// client.connect( 9090, '127.0.0.1', function() {
+	// 	console.log('Connected');
+	// 	client.write( newQ );
+	// });
 
-	client.on('readable', function() {
-		var total;
-	  	var chunk;
-	  	while (null !== (chunk = client.read())) {
-	    	total += chunk.toString('utf-8');
-	  	}
-	  	res.json( JSON.parse( total.toString('utf-8') ) );
-	  	client.destroy(); // kill client after server's response
-	});
+	// client.on('readable', function() {
+	// 	var total;
+	//   	var chunk;
+	//   	while (null !== (chunk = client.read())) {
+	//     	total += chunk.toString('utf-8');
+	//   	}
+	//   	res.json( JSON.parse( total.toString('utf-8') ) );
+	//   	client.destroy(); // kill client after server's response
+	// });
 
-	client.on('data', function(data) {
-		try {
-			var parsed = JSON.parse( data.toString('utf-8' ) );
-			res.json(  parsed );
-		} catch ( e ) {
-			res.json( 500, []);
-		}	
+	// client.on('data', function(data) {
+	// 	try {
+	// 		var parsed = JSON.parse( data.toString('utf-8' ) );
+	// 		res.json(  parsed );
+	// 	} catch ( e ) {
+	// 		res.json( 500, []);
+	// 	}	
 		
-		//console.log('Received: ' + data );
-		client.destroy(); // kill client after server's response
-	});
+	// 	//console.log('Received: ' + data );
+	// 	client.destroy(); // kill client after server's response
+	// });
 
-	client.on('close', function() {
-		console.log('Connection closed');
-	});
-	//res.json(  200, [] );
+	// client.on('close', function() {
+	// 	console.log('Connection closed');
+	// });
+	res.json(  200, [] );
 	
 }
 
