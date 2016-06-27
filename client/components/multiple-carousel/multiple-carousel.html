@@ -1,14 +1,8 @@
 <carousel interval="myInterval">
-  <slide ng-repeat="slide in slides" active="slide.active">
+  <slide ng-repeat="slideSet in slides" active="slide.active">
     <div class="row">
-      <div class="col-md-4 item">
-        <img ng-src="{{slide.image}}">
-      </div>
-      <div class="col-md-4 item">
-        <img ng-src="{{slide.image}}">
-      </div>
-      <div class="col-md-4 item">
-        <img ng-src="{{slide.image}}">
+      <div class="col-md-4 item" ng-repeat="img in slideSet">
+        <img ng-src="{{ img }}">
       </div>
     </div>
   <!-- <div class="carousel-caption">
